@@ -1,0 +1,47 @@
+.profile-user-img {
+    max-width: 100%;
+    width: 50%;
+    display: block;
+    margin: auto;
+}
+
+.table-striped-off tr {
+    background-color: unset !important;
+}
+
+.margin-bottom-off {
+    margin-bottom: 0px;
+}
+
+.tab-content > .tab-pane {
+    padding: 0px;
+}
+
+.tab-content > .tab-pane .box-body > table {
+    border-top: 0px;
+}
+
+#loader {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#ajax-content-loader {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.main-navbar {
+    z-index: 11;
+}
+
+select.form-control {
+    background-position: right calc(0.375em + 0.7875rem) center !important;
+}

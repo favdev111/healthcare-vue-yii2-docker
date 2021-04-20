@@ -1,0 +1,394 @@
+/* Flexbox
+--------------------------------------------------*/
+.l-flexbox {
+    display: -webkit-flex;
+    /* For Safari 6.1+ */
+    display: -ms-flexbox;
+    /* For IE10 */
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.l-flexbox_inline {
+    display: -webkit-inline-flex;
+    /* For Safari 6.1+ */
+    display: -ms-inline-flexbox;
+    /* For IE10 */
+    display: inline-flex;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: flex-start;
+    align-items: flex-start;
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+    -ms-justify-content: flex-start;
+    width: 100%;
+}
+.l-flexbox_column {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+.l-flexbox_flexcenter {
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.l-flexbox_flexend {
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+}
+.l-flexbox_flexbetween {
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+.l-flexbox_flexwrap {
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.l-flexbox_alignstretch {
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+}
+.l-flexbox_flexstart {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+}
+/* Layouts
+--------------------------------------------------*/
+.l-wrapper {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.l-page.l-chat_wrapper {
+    width: 100%;
+    height: 100%;
+    margin: 50px auto 0;
+}
+.l-page {
+    height: 100%;
+}
+
+.l-welcome_container {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background-color: #fff;
+    position: relative;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.26);
+}
+.l-welcome_container.reset_pas {
+    height: 318px;
+    top: calc(50% + 45px);
+}
+.l-welcome_main_logo {
+    padding-top: 79px;
+}
+.l-welcome_block {
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+}
+.l-welcome_logo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    background: image-url('qm-logo.svg') 50% no-repeat;
+}
+.l-welcome_text_logo {
+    width: 283px;
+    height: 49px;
+    margin: 35px auto 0;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    font-size: 42px;
+    font-weight: 300;
+    letter-spacing: 3.7px;
+    color: #6e6e6e;
+}
+.l-welcome_text_description {
+    margin: 6px auto 0;
+    width: 110px;
+    height: 19px;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    color: #00bf28;
+}
+.l-welcome_logo_login {
+    width: 46px;
+    height: 46px;
+    position: absolute;
+    top: 50px;
+    left: 56px;
+    background: image-url('qm-logo.svg') 50% no-repeat;
+    background-size: cover;
+}
+.l-welcome_text_logo_login {
+    width: 150px;
+    height: 25px;
+    position: absolute;
+    top: 51px;
+    left: 118px;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    font-size: 22px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: #6e6e6e;
+}
+.l-welcome_text_login {
+    width: 40px;
+    height: 16px;
+    position: absolute;
+    top: 80px;
+    left: 118px;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    color: #959595;
+}
+.l-form {
+    position: relative;
+    left: 56px;
+    width: 304px;
+}
+.l-form_login {
+    top: 120px;
+}
+.l-form_reset {
+    top: 18px;
+}
+.l-spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.l-welcome_links {
+    position: absolute;
+    width: 416px;
+    height: 24px;
+    bottom: -40px;
+}
+.l-welcome_links * {
+    display: inline-block;
+    vertical-align: middle;
+}
+.l-welcome_header_forgot {
+    padding: 50px 0 0 53px;
+}
+.l-container {
+    height: 100%;
+    background: #fff;
+    border-top: 0;
+}
+.l-header {
+    z-index: 2;
+    background-color: #fff;
+    position: relative;
+    height: 80px;
+    padding-left: 20px;
+    border-bottom: 2px solid #00bf28;
+}
+.l-content {
+    // height: 100%;
+    position: relative;
+}
+.l-sidebar {
+    width: 100%;
+    height: 100%;
+}
+.l-search {
+    z-index: 1;
+    background-color: #fff;
+    height: 60px;
+    padding: 15px;
+}
+
+.l-list {
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+  max-height: calc(100vh - 100px);
+}
+
+.l-list-wrap {
+    height: 100%;
+    padding-bottom: 0;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.l-list-header {
+    padding: 0 20px;
+    background: #f2f2f2;
+}
+.l-list-header-title {
+    font-size: 15px;
+    line-height: 30px;
+    color: #999;
+    text-transform: uppercase;
+}
+.l-workspace-wrap {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    background: #fff;
+    z-index: 10;
+    transform: translateX(100%);
+    transition: all 0.3s;
+    padding-top: 100px;
+
+    &-visible {
+        transform: translateX(0);
+    }
+}
+.l-mobile-right-side {
+    position: absolute;
+    left: 0;
+    top: 50px;
+    width: 100%;
+    height: 100%;
+    transform: translate(100%);
+    transition: all 0.3s;
+    background: #fff;
+}
+.l-mobile-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 15px 0;
+    border-bottom: 1px solid #ECECEC;
+    min-height: 50px;
+    text-align: center;
+    z-index: 15;
+
+    h1 {
+        margin: 0;
+    }
+}
+.l-workspace {
+    height: 100%;
+    overflow: visible;
+}
+.l-cap {
+    height: 63vh;
+    margin: auto;
+    display: none;
+}
+.l-cap_contacts {
+    height: auto;
+}
+.l-footer {
+    z-index: 2;
+    background-color: #fff;
+    position: relative;
+    height: 60px;
+    padding: 0 20px;
+}
+.l-app-version {
+    height: 60px;
+    line-height: 60px;
+    width: 130px;
+    text-align: right;
+    font-size: 14px;
+    color: #999;
+}
+.welcom-app-version {
+    width: 115px;
+    text-align: right;
+    font-size: 14px;
+    color: #999;
+}
+/* Chats
+--------------------------------------------------*/
+.l-chat_group {
+    position: relative;
+}
+.l-chat-header {
+    z-index: 1;
+    background-color: #fff;
+    position: relative;
+    height: 75px;
+    padding: 0 20px;
+    background: #f8f8f8;
+    border-bottom: 1px solid #f2f2f2;
+}
+.l-chat_group .l-chat-header {
+    height: 55px;
+}
+.l-chat-content {
+    position: relative;
+    height: calc(100% - 170px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.l-chat_group .l-chat-content {
+    height: calc(100% - 170px);
+}
+.is-request .l-chat-content {
+    height: calc(100% - 65px);
+
+    &.show-captcha {
+        height: calc(100% - 157px);
+    }
+}
+.l-chat_group .l-chat-content_min {
+    margin-top: 94px;
+    height: calc(100% - 55px - 90px - 94px);
+}
+.l-chat-footer {
+    z-index: 1;
+    background-color: #fff;
+    height: 65px;
+    padding: 15px;
+    border-top: 1px solid rgba(187, 187, 187, 0.35);
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+.l-message {
+    position: relative;
+    height: 35px;
+    min-height: 35px;
+    width: calc(100% - 80px);
+}
+.l-typing {
+    display: none; //change-css
+    vertical-align: top;
+    font-size: 15px;
+    height: 34px;
+    width: 75%;
+}
+.l-input-menu {
+    height: auto;
+    width: auto;
+    position: relative;
+}
+.l-input-menu .l-input-buttons:last-child {
+    margin-right: 0;
+}

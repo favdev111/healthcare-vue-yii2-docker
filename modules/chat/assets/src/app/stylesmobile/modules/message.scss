@@ -1,0 +1,232 @@
+/* message */
+.aside .profileUserName  {
+    font-weight: 500;
+    font-size: 14px;
+    color: #333333;
+
+}
+.l-chat-content .profileUserName {
+    font-weight: 600;
+    font-size: 14px;
+    color: #4a4a4a;
+    word-break: break-word;
+}
+.message {
+    padding: 15px;
+    border-bottom: 1px solid rgba(217, 217, 217, 0.3);
+}
+.message:last-child {
+    border-bottom: none;
+}
+.new_messages {
+    padding: 15px 20px 15px 25px;
+    border-bottom: 1px solid #f2f2f2;
+    font:600 16px 'Open Sans', sans-serif;
+    color: #007de3;
+}
+.message_service {
+    padding: 10px 20px 10px 10px;
+}
+.message_service:last-of-type .btn_request_again {
+    display: inline-block;
+}
+article.message[data-status="typing"] {
+    height: 100%;
+    line-height: 100%;
+    padding: 9px;
+    border-bottom: none;
+}
+article.message[data-status="typing"] > div {
+    display: inline-block;
+    margin-left: 7px;
+    color: #B2B2B2;
+}
+.message_typing {
+    max-width: 450px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.message-container-wrap {
+    width: 100%;
+}
+.message-container {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 20px;
+}
+.message-container:first-child {
+    margin-top: 0;
+}
+.message-content {
+    padding-left: 20px;
+    width: 100%;
+    color: #333;
+    word-wrap: break-word;
+}
+.message_attach .message-content {
+    width: 100%;
+    padding-left: 0;
+}
+.message_attach {
+    .message-time {
+        width: 75px;
+    }
+}
+.attach-inner-scroll {
+    max-height: 50vh;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.message-author {
+    margin: 0;
+}
+.message_service .message-author {
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 22px;
+    word-break: break-word;
+}
+.message_attach_row .message-author {
+    line-height: 37px;
+}
+.message-error {
+    color: #c03d3d;
+}
+.message-body {
+    position: relative;
+    white-space: pre-wrap;
+    color: #333333;
+    line-height: 1.4em;
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Proxima Nova', sans-serif;
+    font-size: 14px;
+    word-break: break-word;
+}
+.message-body p {
+    margin-bottom: 10px;
+}
+.message-body p:last-of-type {
+    margin-bottom: 0;
+}
+.message-body a {
+    color: #0d70b3;
+}
+.message-content.indent {
+    padding-left: 70px;
+}
+.message-info {
+    width: 120px;
+    height: 24px;
+    text-align: right;
+    padding-top: 5px;
+}
+.message-time {
+    display: inline-block;
+    vertical-align: top;
+    width: 115px;
+    font-size: 12px;
+    text-align: right;
+    font-weight: 400;
+    line-height: 1;
+    color: #999999;
+}
+.message-time a {
+    font-size: 14px;
+    color: #0d70b3;
+}
+.message_attach_row .message-time {
+    line-height: 28px;
+}
+.message-status {
+    display: inline-block;
+    vertical-align: top;
+    width: 115px;
+    font-size: 12px;
+    text-align: right;
+    font-weight: 400;
+    line-height: 1;
+    color: #999999;
+}
+.info_indent {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 24px;
+    height: 28px;
+    text-align: right;
+}
+.message-geo {
+    display: none;
+}
+.message-geo.with-geo {
+    background: image-url('ic_location_sm.svg') 50% 25% no-repeat;
+    cursor: pointer;
+}
+.message-avatar.request-button_pending {
+    margin: 5px 5px 0 15px;
+}
+.message-avatar.request-button_cancel {
+    margin: 6px 5px 0 15px;
+}
+.message-avatar.request-button_ok {
+    margin: 3px 5px 0 15px;
+}
+/* preview */
+.preview {
+    width: 200px;
+    height: 175px;
+    float: left;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+.preview:hover {
+    opacity: 0.6;
+}
+.preview-video {
+    position: relative;
+    width: 180px;
+    height: 125px;
+    background: #333;
+    float: none;
+}
+.preview-video:before {
+    content: "";
+    position: absolute;
+    margin: auto auto auto 48%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid #ccc;
+}
+.preview-photo img {
+    max-width: 200px;
+    max-height: 175px;
+    transform: translate(0, -50%);
+    position: absolute;
+    top: 50%;
+}
+.attachment {
+    position: absolute;
+    top: 7px;
+    right: 15px;
+    width: 14px;
+    height: 38px;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.click-avatar {
+    cursor: pointer;
+}
+
+.wrap-tutor-info .profileUserAvatar {
+    cursor: pointer;
+}

@@ -1,0 +1,68 @@
+.build: &build
+    stage: deploy
+    variables:
+        GIT_STRATEGY: none
+    script:
+        - cd $PROJECT_PATH
+        - git checkout $CI_COMMIT_REF_NAME
+        - git pull origin $CI_COMMIT_REF_NAME
+        - if [[ `git status --porcelain` ]]; then git status --porcelain; echo -e "\033[0;31mYou have modified files in git\033[0m"; exit 1; fi
+        - nvm use
+        - php8.0 /usr/local/bin/composer2 install --no-scripts -o
+        - php8.0 init --env=$ENVIRONMENT_YII_NAME --overwrite=y
+        - php8.0 -r "if(function_exists('opcache_reset')) opcache_reset();"
+        - php8.0 yii migrate --interactive=0
+        - php8.0 yii cache/flush-all
+        - php8.0 yii cache/flush-schema --interactive=0
+#        - supervisorctl restart $SUPERVISOR_QUEUE_NAME
+        - supervisorctl restart $SUPERVISOR_QUEUE_YII_NAME
+#        - php8.0 vendor/bin/openapi --output api/documentation/swagger ./api/controllers ./modules/*/controllers/api
+        - php8.0 vendor/bin/openapi --output api2/documentation/swagger ./api2/documentation ./modules/*/models/api2
+        - bash .gitlab/scripts/build-theme.bash
+
+stages:
+    - syntax
+    - deploy
+    - review
+
+development:
+    <<: *build
+    environment:
+        name: development
+    only:
+        - development
+    tags:
+        - development
+    variables:
+        ENVIRONMENT_YII_NAME: Development
+        PROJECT_PATH: /home/gitlab-runner/www/winitclinic/dev/api
+        SUPERVISOR_QUEUE_NAME: winitclinic_queue_dev
+        SUPERVISOR_QUEUE_YII_NAME: winitclinic_queue_yii_dev
+
+production:
+    stage: deploy
+    when: manual
+    only:
+        - master
+    tags:
+        - production
+    variables:
+        GIT_STRATEGY: none
+    image: kroniak/ssh-client
+    before_script:
+        - eval $(ssh-agent -s)
+        - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+        - mkdir -p ~/.ssh
+        - chmod 700 ~/.ssh
+        - ssh-keyscan 52.9.144.234 >> ~/.ssh/known_hosts
+        - chmod 644 ~/.ssh/known_hosts
+    script:
+        - ssh deploy@52.9.144.234 "cd www/winitclinic.com && bash ./deploy.sh"
+
+phpcs:
+    stage: syntax
+    except:
+        - staging
+        - master
+    script:
+        - bash .gitlab/scripts/phpcs.bash

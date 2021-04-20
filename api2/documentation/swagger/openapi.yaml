@@ -1,0 +1,2684 @@
+openapi: 3.0.0
+info:
+  title: 'Winitclinic API v1'
+  contact:
+    email: hello@eltexsoft.com
+  version: 1.0.0
+servers:
+  -
+    url: /api/v1
+    variables:
+      schema:
+        enum:
+          - https
+          - http
+        default: ''
+paths:
+  /accounts/signin:
+    post:
+      tags:
+        - accounts
+      summary: Signin
+      description: ''
+      parameters:
+        -
+          name: expand
+          in: query
+          description: 'To return account extra data, for example, you can add ''chat'', ''subjects'''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  description: 'Email address'
+                  type: string
+                password:
+                  description: Password
+                  type: string
+              type: object
+      responses:
+        '200':
+          description: 'Login successful'
+        '422':
+          description: 'Validation errors'
+  /accounts/signout:
+    post:
+      tags:
+        - accounts
+      summary: 'Sign out endpoint. Use to remove account authorization token.'
+      description: ''
+      responses:
+        '204':
+          description: 'Authorization token successfully removed'
+      security:
+        -
+          Bearer: []
+  /accounts/me:
+    get:
+      tags:
+        - accounts
+      summary: 'Get my account data'
+      description: ''
+      parameters:
+        -
+          name: expand
+          in: query
+          description: 'To return account extra data, for example, you can add ''chat'', ''subjects'''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: 'Login successful'
+      security:
+        -
+          Bearer: []
+  /accounts/resend-confirmation:
+    post:
+      tags:
+        - accounts
+      summary: 'Resend confirmation'
+      description: 'Resend confirmation message'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  description: 'Email address'
+                  type: string
+              type: object
+      responses:
+        '204':
+          description: 'Email was send'
+        '404':
+          description: 'No such unapproved account'
+  /accounts/signup:
+    post:
+      tags:
+        - accounts
+      summary: SignUp
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  description: 'Email address'
+                  type: string
+                newPassword:
+                  description: Password
+                  type: string
+                firstName:
+                  description: 'First name'
+                  type: string
+                lastName:
+                  description: 'Last name'
+                  type: string
+                phoneNumber:
+                  description: 'Phone number'
+                  type: string
+                dateOfBirth:
+                  description: 'Date of birth'
+                  type: string
+              type: object
+      responses:
+        '200':
+          description: 'Sign up successful'
+        '422':
+          description: 'Validation errors'
+  /constants:
+    get:
+      tags:
+        - constants
+      summary: 'Get constants'
+      description: ''
+      responses:
+        '200':
+          description: ''
+  /accounts/confirm:
+    post:
+      tags:
+        - accounts
+      summary: 'Confirm account'
+      description: ''
+      responses:
+        '200':
+          description: ''
+  /configs:
+    get:
+      tags:
+        - configs
+      summary: 'Get config. For example config for chat (appId, authKey, authSecret)'
+      description: ''
+      responses:
+        '200':
+          description: 'Login successful'
+      security:
+        -
+          Bearer: []
+  /accounts/subjects:
+    get:
+      tags:
+        - accounts
+      summary: 'Get subjects'
+      description: ''
+      parameters:
+        -
+          name: jobId
+          in: query
+          description: 'Job ID'
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ''
+      security:
+        -
+          Bearer: []
+  /accounts/new-device-token:
+    post:
+      tags:
+        - accounts
+      summary: 'Change Device token'
+      description: ''
+      requestBody:
+        required: true
+      responses:
+        '200':
+          description: ''
+      security:
+        -
+          Bearer: []
+  /accounts:
+    put:
+      tags:
+        - accounts
+      summary: 'Update auth account'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - gender
+                - firstName
+                - lastName
+                - phoneNumber
+                - dateOfBirth
+              properties:
+                gender:
+                  description: 'Gender ID'
+                  type: string
+                  example: M
+                firstName:
+                  description: 'First name'
+                  type: string
+                  example: John
+                lastName:
+                  description: 'Last name'
+                  type: string
+                  example: Doe
+                phoneNumber:
+                  description: 'Phone number'
+                  type: string
+                  example: '8888888888'
+                dateOfBirth:
+                  description: 'Date of birth'
+                  type: string
+                  example: '1991-12-30'
+              type: object
+      responses:
+        '200':
+          description: 'Update successful'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountModelResponse'
+        '422':
+          description: 'Validation errors'
+      security:
+        -
+          Bearer: []
+  /accounts/password:
+    patch:
+      tags:
+        - accounts
+      summary: 'Change password of current auth account'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                passwordCurrent:
+                  description: 'Password of current auth account'
+                  type: string
+                  example: oldSuperP@ssw0rd
+                password:
+                  description: 'New password'
+                  type: string
+                  example: newSuperP@ssw0rd
+              type: object
+      responses:
+        '204':
+          description: 'Success. Response is empty.'
+  /allergy:
+    get:
+      tags:
+        - Allergy
+      summary: 'Get list of allergy names'
+      responses:
+        '200':
+          description: 'Successful result'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllergyResponse'
+  /allergy-category:
+    get:
+      tags:
+        - 'Allergy category'
+      summary: 'Get list of allergy categories names'
+      responses:
+        '200':
+          description: 'Successful result'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllergyCategoryResponse'
+  /allergy-category/get-all:
+    get:
+      tags:
+        - 'Allergy category'
+      summary: 'Get list of allergy categories and allergies. Endpoint special for health tab'
+      responses:
+        '200':
+          description: 'Successful result'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllergyCategoryResponseAll'
+  /autoimmune-disease:
+    get:
+      tags:
+        - autoimmune-disease
+      summary: 'Get list'
+      description: ''
+      parameters:
+        -
+          name: name
+          in: query
+          description: name
+          required: false
+          schema:
+            type: string
+        -
+          name: page
+          in: query
+          description: 'Page number'
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List
+      security:
+        -
+          Bearer: []
+  /education-college:
+    get:
+      tags:
+        - education-college
+      summary: 'Get college list'
+      description: ''
+      parameters:
+        -
+          name: name
+          in: query
+          description: 'College name'
+          required: false
+          schema:
+            type: string
+        -
+          name: country
+          in: query
+          description: 'Country code (1 - USA, 2 - Canada)'
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'List of colleges'
+      security:
+        -
+          Bearer: []
+  /health-goal:
+    get:
+      tags:
+        - health-goal
+      summary: 'Get list'
+      description: ''
+      parameters:
+        -
+          name: name
+          in: query
+          description: name
+          required: false
+          schema:
+            type: string
+        -
+          name: page
+          in: query
+          description: 'Page number'
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List
+      security:
+        -
+          Bearer: []
+  /health-pros/profile:
+    patch:
+      tags:
+        - 'Health Pros Profile'
+      summary: 'Fill Form'
+      description: ''
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                phoneNumber:
+                  type: string
+                gender:
+                  type: string
+                dateOfBirth:
+                  description: Y-m-d
+                  type: string
+                placeId:
+                  type: string
+              type: object
+      responses:
+        '200':
+          description: Success
+        '422':
+          description: 'Validation errors'
+      security:
+        -
+          Bearer: []
+  /health-pros/role:
+    patch:
+      tags:
+        - 'Health Pros Role'
+      summary: 'Fill Form'
+      description: ''
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                professionalTypeId:
+                  type: integer
+                doctorTypeId:
+                  description: 'Used for professionalTypeId is 1(doctor) or 3(nurse practitioner). For nurse is specialty'
+                  type: integer
+                npiNumber:
+                  type: string
+                yearsOfExperience:
+                  type: integer
+                isBoardCertified:
+                  type: integer
+                hasDisciplinaryAction:
+                  type: integer
+                disciplinaryActionText:
+                  type: string
+                currentlyEnrolled:
+                  type: integer
+                insuranceCompanies:
+                  type: array
+                  items: { $ref: '#/components/schemas/AccountInsuranceCompanyModel' }
+                insuranceCompanyText:
+                  type: string
+                licenceStates:
+                  type: array
+                  items: { $ref: '#/components/schemas/AccountLicenceModel' }
+                telehealthStates:
+                  type: array
+                  items: { $ref: '#/components/schemas/AccountTelehealthModel' }
+              type: object
+      responses:
+        '200':
+          description: Success
+        '422':
+          description: 'Validation errors'
+      security:
+        -
+          Bearer: []
+  /health-pros/specification:
+    patch:
+      tags:
+        - 'Health Pros Specification'
+      summary: 'Fill Form'
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                healthTests:
+                  type: array
+                  items: { $ref: '#/components/schemas/AccountHealthTestModel' }
+                symptoms:
+                  type: array
+                  items: { $ref: '#/components/schemas/AccountSymptomModel' }
+                medicalConditions:
+                  type: array
+                  items: { $ref: '#/components/schemas/AccountMedicalConditionModel' }
+                autoimmuneDiseases:
+                  type: array
+                  items: { $ref: '#/components/schemas/AccountAutoimmuneDiseaseModel' }
+                healthGoals:
+                  type: array
+                  items: { $ref: '#/components/schemas/AccountHealthGoalModel' }
+              type: object
+      responses:
+        '200':
+          description: Success
+        '422':
+          description: 'Validation errors'
+      security:
+        -
+          Bearer: []
+  /health-pros/avatar:
+    post:
+      tags:
+        - 'Health Pros Avatar'
+      summary: 'Fill Form'
+      description: ''
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              required:
+                - file
+              properties:
+                file:
+                  description: 'file to upload'
+                  type: string
+                  format: file
+              type: object
+      responses:
+        '200':
+          description: Success
+        '422':
+          description: 'Validation errors'
+      security:
+        -
+          Bearer: []
+  /health-pros/rate-and-policy:
+    post:
+      tags:
+        - 'Health Pros Rate and Policy'
+      summary: 'Fill Form'
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HealthProsRateModel'
+      responses:
+        '200':
+          description: Success
+        '422':
+          description: 'Validation errors'
+      security:
+        -
+          Bearer: []
+  /health-test-category:
+    get:
+      tags:
+        - health-test-category
+      summary: 'Get  list'
+      description: ''
+      parameters:
+        -
+          name: name
+          in: query
+          description: 'Health test category name'
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'List of health tests'
+      security:
+        -
+          Bearer: []
+  /health-test:
+    get:
+      tags:
+        - health-test
+      summary: 'Get list'
+      description: ''
+      parameters:
+        -
+          name: name
+          in: query
+          description: 'Health test name'
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'List of health tests'
+      security:
+        -
+          Bearer: []
+  /insurance-company:
+    get:
+      tags:
+        - insurance-company
+      summary: 'Get list of insurance companies'
+      description: ''
+      parameters:
+        -
+          name: name
+          in: query
+          description: 'Company name'
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'List of insurance companies'
+      security:
+        -
+          Bearer: []
+  /language:
+    get:
+      tags:
+        - language
+      summary: 'Get state list'
+      description: ''
+      responses:
+        '200':
+          description: 'List of statess'
+      security:
+        -
+          Bearer: []
+  /lifestyle-diet:
+    get:
+      tags:
+        - 'Lifestyle diet'
+      summary: 'Get list of lifestyle diet names'
+      responses:
+        '200':
+          description: 'Successful result'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LifestyleDietResponse'
+  /list-patient:
+    get:
+      tags:
+        - list-patient
+      summary: 'Get patient list'
+      description: ''
+      responses:
+        '200':
+          description: 'List of patient'
+        '422':
+          description: 'Validation errors'
+      security:
+        -
+          Bearer: []
+  /medical-condition:
+    get:
+      tags:
+        - medical-condition
+      summary: 'Get list'
+      description: ''
+      parameters:
+        -
+          name: name
+          in: query
+          description: name
+          required: false
+          schema:
+            type: string
+        -
+          name: page
+          in: query
+          description: 'Page number'
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List
+      security:
+        -
+          Bearer: []
+  /notifications:
+    get:
+      tags:
+        - Notifications
+      summary: 'Get list of notifications'
+      description: ''
+      responses:
+        '200':
+          description: 'Successful result '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationResponse'
+      security:
+        -
+          Bearer: []
+  '/notifications/read/{notificationId}':
+    put:
+      tags:
+        - Notifications
+      summary: 'Mark notification as read'
+      description: ''
+      parameters:
+        -
+          name: notificationId
+          in: path
+          description: 'notification ID'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'Success. Data is empty'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+        '400':
+          description: 'Invalid notification data.'
+      security:
+        -
+          Bearer: []
+  /notifications/unread-count:
+    get:
+      tags:
+        - Notifications
+      summary: 'Get count of unread notifications'
+      description: ''
+      responses:
+        '200':
+          description: 'Successful result'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationCountResponse'
+        '400':
+          description: 'Invalid notification data.'
+      security:
+        -
+          Bearer: []
+  /notification/settings:
+    get:
+      tags:
+        - 'Notifications settings'
+      summary: 'Get list of notifications settings'
+      description: ''
+      responses:
+        '200':
+          description: 'Successful result '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationSettingResponse'
+      security:
+        -
+          Bearer: []
+    post:
+      tags:
+        - 'Notifications settings'
+      summary: 'Set notification settings'
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                notificationTypes:
+                  description: 'List ids of notifications settings'
+                  type: array
+                  items: { type: integer }
+              type: object
+      responses:
+        '200':
+          description: 'Success. Data is empty'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+        '422':
+          description: 'Validation errors'
+      security:
+        -
+          Bearer: []
+  /patient/accounts/signup:
+    post:
+      tags:
+        - accounts
+        - patient
+      summary: SignUp
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  description: 'Email address'
+                  type: string
+                newPassword:
+                  description: Password
+                  type: string
+                firstName:
+                  description: 'First name'
+                  type: string
+                lastName:
+                  description: 'Last name'
+                  type: string
+              type: object
+      responses:
+        '200':
+          description: 'Sign up successful'
+        '422':
+          description: 'Validation errors'
+  /patient/payment/card:
+    get:
+      tags:
+        - patient
+        - cards
+      summary: 'Get list of cards'
+      description: ''
+      responses:
+        '200':
+          description: 'List of cards'
+      security:
+        -
+          Bearer: []
+    post:
+      tags:
+        - patient
+        - cards
+      summary: 'Add cards to accounts'
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                activePaymentCard:
+                  description: 'Token of active card'
+                  type: string
+                paymentCardTokens:
+                  description: 'Array of payment card token from stripe'
+                  type: array
+                  items: { type: string }
+              type: object
+      responses:
+        '200':
+          description: 'Cards were added'
+        '422':
+          description: 'Validation errors'
+      security:
+        -
+          Bearer: []
+  /patient/payment/card/set-active:
+    post:
+      tags:
+        - patient
+        - cards
+      summary: 'Set active card'
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                id:
+                  description: 'Card id'
+                  type: integer
+              type: object
+      responses:
+        '200':
+          description: 'Cards was set as active'
+        '404':
+          description: 'Card not found'
+      security:
+        -
+          Bearer: []
+  '/patient/payment/card/{id}':
+    delete:
+      tags:
+        - patient
+        - cards
+      summary: 'Delete card'
+      description: ''
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Card id'
+          required: true
+      responses:
+        '204':
+          description: 'Cards was deleted'
+        '404':
+          description: 'Card not found'
+      security:
+        -
+          Bearer: []
+  '/patient/health-profiles/{id}':
+    get:
+      tags:
+        - HealthProfile
+      summary: 'Get health profile general info'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Health profile id'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'Successful result'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthProfileGeneralResponse'
+      security:
+        -
+          Bearer: []
+    post:
+      tags:
+        - HealthProfile
+      summary: 'Update health profile general info'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Health profile id'
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - firstName
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                birthday:
+                  description: 'In format m/d/Y'
+                  type: string
+                  example: 11/11/1985
+                phoneNumber:
+                  type: string
+                  example: '+108888000000'
+                email:
+                  type: string
+                  example: winit@eltexsft.com
+                height:
+                  description: '1ft === 12in, example 6'' 11 => 6*12 => 72'
+                  type: number
+                  example: '96'
+                weight:
+                  type: number
+                  example: '66'
+                gender:
+                  type: integer
+                  example: '1'
+                googlePlaceId:
+                  description: 'https://developers.google.com/places/web-service/place-id'
+                  type: string
+                maritalStatusId:
+                  type: integer
+                  example: '1'
+                educationLevelId:
+                  type: integer
+                  example: '1'
+                childrenCount:
+                  type: integer
+                  example: '0'
+                occupation:
+                  type: string
+                employer:
+                  type: string
+                relationshipId:
+                  type: integer
+              type: object
+      responses:
+        '200':
+          description: 'Successful result'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthProfileGeneralResponse'
+      security:
+        -
+          Bearer: []
+  '/patient/health-profile-health?healthProfileId={healthProfileId}':
+    post:
+      tags:
+        - HealthProfileHealth
+      summary: 'Create and update health profile health'
+      description: "\n *     All body params are optional except isAcceptAgreement property, it must be true\n *     In case objects that have update and add structure will be set to empty array, then all data related with it object will be deleted\n *     For skip deleting of objects values need just remove it key from request\n *     In case objects that have update and add structure will be set to any values, it will be add or update to database, another values will be deleted\n *     Objects that have update and add must be have an unique values in case saving identifier of objects, except text saving"
+      parameters:
+        -
+          name: healthProfileId
+          in: path
+          description: 'Health profile id'
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                isAcceptAgreement:
+                  description: 'Accept agreenment, always must be set to true'
+                  type: boolean
+                smokeId:
+                  description: 'Unique identifier of HealthSmokeModel'
+                  type: integer
+                drinkId:
+                  description: 'Unique identifier of HealthDrinkModel'
+                  type: integer
+                isOtherSubstance:
+                  description: 'Has other substance or no'
+                  type: boolean
+                symptoms:
+                  $ref: '#/components/schemas/addUpdateListModel'
+                medicalConditions:
+                  $ref: '#/components/schemas/addUpdateListModel'
+                autoImmuneDiseases:
+                  $ref: '#/components/schemas/addUpdateListModel'
+                allergies:
+                  $ref: '#/components/schemas/addUpdateListModel'
+                allergiesCategory:
+                  $ref: '#/components/schemas/addUpdateListModel'
+                foodIntolerances:
+                  $ref: '#/components/schemas/addUpdateListModel'
+                foodIntolerancesCategory:
+                  $ref: '#/components/schemas/addUpdateListModel'
+                lifestyleDiet:
+                  $ref: '#/components/schemas/addUpdateListModel'
+                currentMedications:
+                  $ref: '#/components/schemas/addUpdateListModel'
+                healthConcerns:
+                  $ref: '#/components/schemas/addUpdateListModel'
+                healthGoals:
+                  $ref: '#/components/schemas/addUpdateListModel'
+                other:
+                  $ref: '#/components/schemas/addUpdateListModel'
+              type: object
+      responses:
+        '200':
+          description: 'Successful result'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthProfileGeneralResponse'
+      security:
+        -
+          Bearer: []
+  /patient/health-profile-insurances:
+    get:
+      tags:
+        - HealthProfileInsurance
+      summary: 'Get list of health profile insurances'
+      description: ''
+      responses:
+        '200':
+          description: 'Successful result'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthProfileInsuranceResponse'
+      security:
+        -
+          Bearer: []
+    post:
+      tags:
+        - HealthProfileInsurance
+      summary: 'Add insurance'
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - insuranceCompanyId
+                - groupNumber
+                - policyNumber
+                - googlePlaceId
+                - firstName
+                - lastName
+                - socialSecurityNumber
+                - dateOfBirth
+                - isPrimary
+              properties:
+                insuranceCompanyId:
+                  description: 'Insurance company Id'
+                  type: integer
+                groupNumber:
+                  description: 'Group name'
+                  type: string
+                policyNumber:
+                  description: 'policy number'
+                  type: string
+                googlePlaceId:
+                  description: 'google place Id'
+                  type: string
+                firstName:
+                  description: 'First name'
+                  type: string
+                lastName:
+                  description: 'Last name'
+                  type: string
+                socialSecurityNumber:
+                  description: 'Social security number'
+                  type: string
+                dateOfBirth:
+                  description: 'Birth date'
+                  type: string
+                isPrimary:
+                  description: 'Primary(1) or secondary(0) insurance'
+                  type: integer
+              type: object
+      responses:
+        '200':
+          description: 'Successful result'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthProfileInsuranceResponse'
+        '404':
+          description: 'Object not found: Insurance id'
+        '422':
+          description: 'Validation errors'
+      security:
+        -
+          Bearer: []
+  '/patient/health-profile-insurances/{insuranceId}':
+    get:
+      tags:
+        - HealthProfileInsurance
+      summary: 'Get health profile insurance'
+      description: ''
+      parameters:
+        -
+          name: insuranceId
+          in: path
+          description: 'Insurance id'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'Successful result'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthProfileInsuranceResponse'
+      security:
+        -
+          Bearer: []
+    put:
+      tags:
+        - HealthProfileInsurance
+      summary: 'Update insurance'
+      description: ''
+      parameters:
+        -
+          name: insuranceId
+          in: path
+          description: 'Insurance id'
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                insuranceCompanyId:
+                  description: 'Insurance company Id'
+                  type: integer
+                groupNumber:
+                  description: 'Group name'
+                  type: string
+                policyNumber:
+                  description: 'policy number'
+                  type: string
+                googlePlaceId:
+                  description: 'google place Id'
+                  type: string
+                firstName:
+                  description: 'First name'
+                  type: string
+                lastName:
+                  description: 'Last name'
+                  type: string
+                socialSecurityNumber:
+                  description: 'Social security number'
+                  type: string
+                dateOfBirth:
+                  description: 'Birth date'
+                  type: string
+              type: object
+      responses:
+        '200':
+          description: 'Successful result'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthProfileInsuranceResponse'
+        '404':
+          description: 'Object not found: Insurance id'
+        '422':
+          description: 'Validation errors'
+      security:
+        -
+          Bearer: []
+  /patient/notes:
+    post:
+      tags:
+        - notes
+      summary: 'Submit patient notes'
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                accountId:
+                  description: accountId
+                  type: integer
+                createdBy:
+                  description: createdBy
+                  type: integer
+                content:
+                  description: '/**'
+                  type: string
+                createdAt:
+                  description: 'In format Y-m-d h:i:s'
+                  type: string
+              type: object
+      responses:
+        '200':
+          description: 'Successful result'
+      security:
+        -
+          Bearer: []
+  '/patient/notes/{accountId}':
+    get:
+      tags:
+        - notes
+      summary: 'Get patient notes'
+      description: ''
+      parameters:
+        -
+          name: accountId
+          in: path
+          description: 'Account Id'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'List of notes'
+      security:
+        -
+          Bearer: []
+  /registration-wizard/step1:
+    post:
+      tags:
+        - registration-wizard
+      summary: 'Fill 1 wizard step'
+      description: ''
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                phoneNumber:
+                  type: string
+                gender:
+                  type: string
+                dateOfBirth:
+                  description: Y-m-d
+                  type: string
+                placeId:
+                  type: string
+              type: object
+      responses:
+        '200':
+          description: Success
+        '422':
+          description: 'Validation errors'
+      security:
+        -
+          Bearer: []
+  /registration-wizard/step2:
+    post:
+      tags:
+        - registration-wizard
+      summary: 'Fill 2 wizard step'
+      description: ''
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                professionalTypeId:
+                  type: integer
+                doctorTypeId:
+                  description: 'Used for professionalTypeId is 1(doctor) or 3(nurse practitioner). For nurse is specialty'
+                  type: integer
+                npiNumber:
+                  type: string
+                yearsOfExperience:
+                  type: integer
+                isBoardCertified:
+                  type: integer
+                hasDisciplinaryAction:
+                  type: integer
+                disciplinaryActionText:
+                  type: string
+                currentlyEnrolled:
+                  type: integer
+                insuranceCompanies:
+                  type: array
+                  items: { $ref: '#/components/schemas/AccountInsuranceCompanyModel' }
+                insuranceCompanyText:
+                  type: string
+                licenceStates:
+                  type: array
+                  items: { $ref: '#/components/schemas/AccountLicenceModel' }
+                telehealthStates:
+                  type: array
+                  items: { $ref: '#/components/schemas/AccountTelehealthModel' }
+              type: object
+      responses:
+        '200':
+          description: Success
+        '422':
+          description: 'Validation errors'
+      security:
+        -
+          Bearer: []
+  /registration-wizard/step3:
+    post:
+      tags:
+        - registration-wizard
+      summary: 'Fill 3 wizard step'
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                healthTests:
+                  type: array
+                  items: { $ref: '#/components/schemas/AccountHealthTestModel' }
+                symptoms:
+                  type: array
+                  items: { $ref: '#/components/schemas/AccountSymptomModel' }
+                medicalConditions:
+                  type: array
+                  items: { $ref: '#/components/schemas/AccountMedicalConditionModel' }
+                autoimmuneDiseases:
+                  type: array
+                  items: { $ref: '#/components/schemas/AccountAutoimmuneDiseaseModel' }
+                healthGoals:
+                  type: array
+                  items: { $ref: '#/components/schemas/AccountHealthGoalModel' }
+              type: object
+      responses:
+        '200':
+          description: Success
+        '422':
+          description: 'Validation errors'
+      security:
+        -
+          Bearer: []
+  /registration-wizard/step4:
+    post:
+      tags:
+        - registration-wizard
+      summary: 'Fill 4 wizard step'
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                educations:
+                  type: array
+                  items: { $ref: '#/components/schemas/AccountEducationModel' }
+                certifications:
+                  type: array
+                  items: { $ref: '#/components/schemas/AccountRewardModel' }
+              type: object
+      responses:
+        '200':
+          description: Success
+        '422':
+          description: 'Validation errors'
+      security:
+        -
+          Bearer: []
+  /registration-wizard/step5:
+    post:
+      tags:
+        - registration-wizard
+      summary: 'Fill 5 wizard step'
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountRateModel'
+      responses:
+        '200':
+          description: Success
+        '422':
+          description: 'Validation errors'
+      security:
+        -
+          Bearer: []
+  /registration-wizard/step6-upload-photo:
+    post:
+      tags:
+        - registration-wizard
+      summary: 'Fill 6 wizard step upload photo'
+      description: ''
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              required:
+                - file
+              properties:
+                file:
+                  description: 'file to upload'
+                  type: string
+                  format: file
+              type: object
+      responses:
+        '200':
+          description: Success
+        '422':
+          description: 'Validation errors'
+      security:
+        -
+          Bearer: []
+  /registration-wizard/step6:
+    post:
+      tags:
+        - registration-wizard
+      summary: 'Fill 6 wizard step'
+      description: ''
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                languages:
+                  type: array
+                  items: { $ref: '#/components/schemas/AccountLanguageModel' }
+              type: object
+      responses:
+        '200':
+          description: Success
+        '422':
+          description: 'Validation errors'
+      security:
+        -
+          Bearer: []
+  /registration-wizard/step7:
+    post:
+      tags:
+        - registration-wizard
+      summary: 'Fill 7 wizard step'
+      description: ''
+      requestBody:
+        content:
+          application/json: {  }
+      responses:
+        '200':
+          description: Success
+        '422':
+          description: 'Validation errors'
+      security:
+        -
+          Bearer: []
+  /social-info/drink:
+    get:
+      tags:
+        - 'Social info'
+      summary: 'Get list of health drinks statuses'
+      responses:
+        '200':
+          description: 'Successful result'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthDrinkResponse'
+  /social-info/smoke:
+    get:
+      tags:
+        - SocialInfo
+      summary: 'Get list of health smoke statuses'
+      responses:
+        '200':
+          description: 'Successful result'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthSmokeResponse'
+  /state:
+    get:
+      tags:
+        - State
+      summary: 'Get state list'
+      description: ''
+      parameters:
+        -
+          name: name
+          in: query
+          description: 'State name'
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'List of statess'
+      security:
+        -
+          Bearer: []
+  /static-page:
+    get:
+      tags:
+        - 'Static page'
+      summary: 'Get static pages list'
+      description: ''
+      parameters:
+        -
+          name: name
+          in: query
+          description: 'Page name'
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'List of pages'
+      security:
+        -
+          Bearer: []
+  /symptom:
+    get:
+      tags:
+        - symptom
+      summary: 'Get symptom list'
+      description: ''
+      parameters:
+        -
+          name: name
+          in: query
+          description: 'Symptom name'
+          required: false
+          schema:
+            type: string
+        -
+          name: page
+          in: query
+          description: 'Page number'
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'List of symptoms'
+      security:
+        -
+          Bearer: []
+  /twillio/roomcreate:
+    post:
+      tags:
+        - 'Twillio video call'
+      summary: 'Create room for video call'
+      description: ''
+      parameters:
+        -
+          name: client_name
+          in: query
+          description: 'client name'
+          required: false
+          schema:
+            type: string
+        -
+          name: patient_id
+          in: query
+          description: 'patient id'
+          required: false
+          schema:
+            type: integer
+        -
+          name: doctor_id
+          in: query
+          description: 'doctor id'
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'Room create successfully'
+components:
+  schemas:
+    ConfigsResponse:
+      allOf:
+        -
+          properties:
+            data:
+              properties:
+                chat:
+                  description: 'Quickblox Chat Config'
+                  properties: { appId: { description: 'Application Identifier', type: integer }, authKey: { description: 'Authentication Key', type: string }, authSecret: { description: 'Authentication Secret', type: string } }
+                  type: object
+              type: object
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    AccountModel:
+      properties:
+        email:
+          description: Email
+          type: string
+          example: test@gmail.com
+        newPassword:
+          description: Password
+          type: string
+      type: object
+    AccountModelWithTokenResponse:
+      allOf:
+        -
+          properties:
+            data:
+              type: object
+              allOf:
+                -
+                  $ref: '#/components/schemas/AccountModel'
+                -
+                  properties: { accessToken: { description: 'Access Token', type: string } }
+                  type: object
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    AccountModelResponse:
+      allOf:
+        -
+          properties:
+            data:
+              $ref: '#/components/schemas/AccountModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    AllergyModel:
+      required:
+        - id
+        - name
+        - allergyCategoryId
+      properties:
+        id:
+          description: 'Unique identificator'
+          type: integer
+          example: 1
+        name:
+          description: 'Allergy name'
+          type: string
+          example: 'Wheat starch'
+        allergyCategoryId:
+          description: 'ID of allergy category'
+          type: integer
+          example: 1
+      type: object
+    AllergyResponse:
+      allOf:
+        -
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/AllergyModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    AllergyCategoryModel:
+      required:
+        - id
+        - name
+        - isMedicalGroup
+      properties:
+        id:
+          description: 'Unique identificator'
+          type: integer
+          example: 1
+        name:
+          description: 'Allergy category name'
+          type: string
+          example: Gluten
+        isMedicalGroup:
+          description: "It's using for medical health group.\n *      true - should set allergy category group\n *      false - should set allergy items"
+          type: boolean
+          example: true
+      type: object
+    AllergyCategoryAllModel:
+      required:
+        - category
+        - items
+      properties:
+        category:
+          required:
+            - id
+            - name
+          properties:
+            id:
+              description: 'Unique identificator'
+              type: integer
+              example: 1
+            title:
+              description: title
+              type: string
+              example: 'Category name'
+            hasItems:
+              description: 'In case category has items'
+              type: boolean
+              example: true
+          type: object
+        items:
+          type: array
+          items:
+            description: 'List of alergies'
+            properties:
+              id:
+                description: 'Unique identificator'
+                type: integer
+                example: 1
+              name:
+                description: name
+                type: string
+                example: 'Name of allergy'
+            type: object
+      type: object
+    AllergyCategoryResponse:
+      allOf:
+        -
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/AllergyCategoryModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    AllergyCategoryResponseAll:
+      allOf:
+        -
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/AllergyCategoryAllModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    AutoimmuneDiseaseResponse:
+      allOf:
+        -
+          properties:
+            data:
+              $ref: '#/components/schemas/AutoimmuneDiseaseModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    EducationCollegeModelResponse:
+      allOf:
+        -
+          properties:
+            data:
+              $ref: '#/components/schemas/EducationCollegeModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    HealthGoalResponse:
+      allOf:
+        -
+          properties:
+            data:
+              $ref: '#/components/schemas/AutoimmuneDiseaseModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    HealthTestCategoryModelResponse:
+      allOf:
+        -
+          properties:
+            data:
+              $ref: '#/components/schemas/HealthTestCategoryModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    HealthTestModelResponse:
+      allOf:
+        -
+          properties:
+            data:
+              $ref: '#/components/schemas/HealthTestModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    InsuranceCompanyModelResponse:
+      allOf:
+        -
+          properties:
+            data:
+              $ref: '#/components/schemas/InsuranceCompanyModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    LanguageModelResponse:
+      allOf:
+        -
+          properties:
+            data:
+              $ref: '#/components/schemas/LanguageModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    LifestyleDietModel:
+      required:
+        - id
+        - name
+      properties:
+        id:
+          description: 'Unique identificator'
+          type: integer
+          example: 1
+        name:
+          description: 'Lifestyle diet name'
+          type: string
+          example: 'Alkaline diet'
+      type: object
+    LifestyleDietResponse:
+      allOf:
+        -
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/LifestyleDietModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    MedicalConditionResponse:
+      allOf:
+        -
+          properties:
+            data:
+              $ref: '#/components/schemas/MedicalConditionModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    NotificationModel:
+      properties:
+        id:
+          description: 'Unique identificator'
+          type: integer
+          example: 3
+        createdAt:
+          description: 'Created at. Format: Y-m-d\TH:i:sP Compatible with ISO-8601'
+          type: string
+          example: '2020-12-03T12:41:50+00:00'
+        message:
+          description: Message
+          type: string
+          example: 'Invalid card number'
+        type:
+          description: 'Type of notifications. Types: 1=credit card'
+          type: integer
+          example: 1
+        isRead:
+          description: 'Mark about read/unread notification'
+          type: boolean
+          example: true
+      type: object
+    NotificationCountResponse:
+      allOf:
+        -
+          properties:
+            data:
+              properties:
+                count:
+                  description: 'Count unread notifications'
+                  type: integer
+                  example: 5
+              type: object
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    NotificationResponse:
+      allOf:
+        -
+          properties:
+            data:
+              $ref: '#/components/schemas/NotificationModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    NotificationSettingModel:
+      required:
+        - id
+        - name
+        - category
+        - isSet
+      properties:
+        id:
+          description: 'Unique identificator'
+          type: integer
+          example: 1
+        name:
+          description: 'Name of setting'
+          type: string
+          example: 'Payroll issued'
+        category:
+          required:
+            - id
+            - name
+          properties:
+            id:
+              description: 'Unique identificator'
+              type: integer
+              example: 1
+            name:
+              description: Name
+              type: string
+              example: 'Setting category name'
+          type: object
+        isSet:
+          description: 'Is set value by current auth account'
+          type: boolean
+          example: 'true'
+      type: object
+    NotificationSettingResponse:
+      allOf:
+        -
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/NotificationSettingModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    DefaultResponse:
+      properties:
+        success:
+          description: 'Whether request was successful or not (false for 422, true for 200, etc.)'
+          type: boolean
+        statusCode:
+          description: 'HTTP Response status code'
+          type: integer
+        message:
+          description: 'Response description'
+          type: string
+      type: object
+    UnauthorizationError:
+      type: object
+      allOf:
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+        -
+          properties:
+            data:
+              type: array
+              items: {  }
+          type: object
+    ValidationError:
+      allOf:
+        -
+          $ref: '#/components/schemas/ValidationErrorData'
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    ValidationErrorData:
+      properties:
+        data:
+          type: array
+          items:
+            description: 'List of errors'
+            properties:
+              field:
+                description: 'Attribute name'
+                type: string
+              message:
+                description: 'Error message text'
+                type: string
+            type: object
+      type: object
+    HealthProfileGeneralModel:
+      required:
+        - firstName
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        birthday:
+          type: string
+        phoneNumber:
+          type: string
+        email:
+          type: string
+        height:
+          type: number
+        weight:
+          type: number
+        gender:
+          type: integer
+        googlePlaceId:
+          type: string
+        address:
+          type: string
+        zipCode:
+          type: string
+        maritalStatusId:
+          type: integer
+        educationLevelId:
+          type: integer
+        childrenCount:
+          type: integer
+        occupation:
+          type: string
+        employer:
+          type: string
+        health:
+          $ref: '#/components/schemas/HealthProfileHealthModel'
+        medical:
+          $ref: '#/components/schemas/HealthProfileMedicalModel'
+      type: object
+    HealthProfileGeneralResponse:
+      allOf:
+        -
+          properties:
+            data:
+              $ref: '#/components/schemas/HealthProfileGeneralModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    HealthProfileHealthModel:
+      required:
+        - isOtherSubstance
+      properties:
+        smoke:
+          $ref: '#/components/schemas/HealthSmokeModel'
+        drink:
+          $ref: '#/components/schemas/HealthDrinkModel'
+        isOtherSubstance:
+          description: "\n *      true - has other substance\n *      false - has no"
+          type: boolean
+          example: true
+        otherSubstanceText:
+          description: 'This property is full in case property isOtherSubstance == true'
+          type: string
+          example: 'Just text'
+      type: object
+    addUpdateListModel:
+      properties:
+        add:
+          items:
+            anyOf:
+              -
+                type: string
+        update:
+          type: array
+          items:
+            required:
+              - id
+              - value
+            properties:
+              id:
+                description: 'Unique identificator'
+                type: integer
+                example: 1
+              value:
+                description: value
+                type: string
+                example: 'String or integer values'
+            type: object
+      type: object
+    HealthProfileMedicalModel:
+      properties:
+        symptoms:
+          type: array
+          items:
+            $ref: '#/components/schemas/medicalInternalIdModel'
+        medicalConditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/medicalInternalIdModel'
+        autoImmuneDiseases:
+          type: array
+          items:
+            $ref: '#/components/schemas/medicalInternalIdModel'
+        allergiesCategory:
+          type: array
+          items:
+            $ref: '#/components/schemas/medicalInternalIdModel'
+        foodIntolerances:
+          type: array
+          items:
+            $ref: '#/components/schemas/medicalInternalIdModel'
+        foodIntolerancesCategory:
+          type: array
+          items:
+            $ref: '#/components/schemas/medicalInternalIdModel'
+        lifestyleDiet:
+          type: array
+          items:
+            $ref: '#/components/schemas/medicalInternalIdModel'
+        currentMedications:
+          type: array
+          items:
+            $ref: '#/components/schemas/medicalTextModel'
+        other:
+          type: array
+          items:
+            $ref: '#/components/schemas/medicalTextModel'
+        healthConcerns:
+          type: array
+          items:
+            $ref: '#/components/schemas/medicalTextModel'
+        healthGoals:
+          type: array
+          items:
+            $ref: '#/components/schemas/medicalInternalIdModel'
+      type: object
+    medicalInternalIdModel:
+      properties:
+        id:
+          description: 'Id of saved record'
+          type: integer
+          example: 1
+        internalId:
+          description: 'Id value of current object'
+          type: integer
+          example: 10
+        name:
+          description: 'Name of value of current object'
+          type: string
+          example: Name
+      type: object
+    medicalTextModel:
+      properties:
+        id:
+          description: 'Id of saved record'
+          type: integer
+          example: 1
+        text:
+          description: 'Text value of current object'
+          type: string
+          example: 'Free text'
+      type: object
+    HealthProfileInsuranceModel:
+      required:
+        - id
+        - firstName
+        - lastName
+      properties:
+        id:
+          description: 'Unique identificator'
+          type: integer
+          example: 3
+        firstName:
+          description: 'Insured’s first name'
+          type: string
+          example: John
+        lastName:
+          description: 'Insured’s last name'
+          type: string
+          example: Doe
+        socialSecurityNumber:
+          description: 'Insured’s social security number'
+          type: string
+          example: 777-CC
+        isPrimary:
+          description: 'Primary(true) or secondary(false) insurance'
+          type: boolean
+          example: true
+        policyNumber:
+          description: 'Policy number'
+          type: string
+          example: 12345-BX
+        groupNumber:
+          description: 'Group number'
+          type: string
+          example: 765XX321
+        dateOfBirth:
+          description: 'Insured’s date of birth. Format: Y-m-d'
+          type: string
+          example: '1990-01-30'
+        insuranceCompany:
+          required:
+            - id
+            - name
+          properties:
+            id:
+              description: 'Unique identificator'
+              type: integer
+              example: 1
+            name:
+              description: Name
+              type: string
+              example: 'Aexcel Plus Choice POS II (Aetna HealthFund)'
+          type: object
+        location:
+          required:
+            - zipCode
+            - city
+            - address
+            - googlePlaceId
+          properties:
+            zipCode:
+              description: 'Zip code'
+              type: integer
+              example: 60614
+            city:
+              description: City
+              type: string
+              example: Chicago
+            address:
+              description: Address
+              type: string
+              example: '1111 W Diversey Pkwy, Chicago, IL'
+            googlePlaceId:
+              description: 'Google place unique indentity'
+              type: string
+              example: ChIJmalJpQHTD4gRAnFpF-iJcng
+          type: object
+      type: object
+    HealthProfileInsuranceResponse:
+      allOf:
+        -
+          properties:
+            data:
+              $ref: '#/components/schemas/HealthProfileInsuranceModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    HealthDrinkModel:
+      required:
+        - id
+        - name
+      properties:
+        id:
+          description: 'Unique identificator'
+          type: integer
+          example: 1
+        name:
+          description: 'Drink status'
+          type: string
+          example: socially
+      type: object
+    HealthSmokeModel:
+      required:
+        - id
+        - name
+      properties:
+        id:
+          description: 'Unique identificator'
+          type: integer
+          example: 1
+        name:
+          description: 'Smoke status'
+          type: string
+          example: currently
+      type: object
+    HealthDrinkResponse:
+      allOf:
+        -
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/HealthDrinkModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    HealthSmokeResponse:
+      allOf:
+        -
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/HealthSmokeModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    StateModelResponse:
+      allOf:
+        -
+          properties:
+            data:
+              $ref: '#/components/schemas/StateModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    StaticPageModelResponse:
+      allOf:
+        -
+          properties:
+            data:
+              $ref: '#/components/schemas/StaticPageModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    SymptomResponse:
+      allOf:
+        -
+          properties:
+            data:
+              $ref: '#/components/schemas/SymptomModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+    AccountAutoimmuneDiseaseModel:
+      required:
+        - accountId
+        - autoimmuneDiseaseId
+      properties:
+        autoimmuneDiseaseId:
+          description: ''
+          type: integer
+      type: object
+    AccountEducationModel:
+      required:
+        - accountId
+        - graduated
+        - collegeId
+      properties:
+        accountId:
+          description: 'Account id'
+          type: integer
+        graduated:
+          description: 'Graduated year'
+          type: integer
+        collegeId:
+          description: 'Id of a college'
+          type: integer
+        degreeId:
+          description: 'Id of a college'
+          type: integer
+      type: object
+    AccountHealthGoalModel:
+      required:
+        - accountId
+        - healthGoalId
+      properties:
+        healthGoalId:
+          description: ''
+          type: integer
+      type: object
+    AccountHealthTestModel:
+      required:
+        - accountId
+        - healthTestId
+      properties:
+        healthTestId:
+          description: ''
+          type: integer
+      type: object
+    AccountInsuranceCompanyModel:
+      required:
+        - insuranceCompanyId
+      properties:
+        insuranceCompanyId:
+          description: 'State id'
+          type: integer
+      type: object
+    AccountLanguageModel:
+      required:
+        - languageId
+      properties:
+        languageId:
+          description: 'Language id'
+          type: integer
+      type: object
+    AccountLicenceModel:
+      required:
+        - stateId
+        - licence
+      properties:
+        stateId:
+          description: 'State id'
+          type: integer
+        licence:
+          description: 'Licence for this state'
+          type: string
+      type: object
+    AccountMedicalConditionModel:
+      required:
+        - accountId
+        - medicalConditionId
+      properties:
+        medicalConditionId:
+          description: ''
+          type: integer
+      type: object
+    AccountRateModel:
+      required:
+        - ratePolicy
+        - rate15
+        - rate30
+        - rate45
+        - rate60
+      properties:
+        ratePolicy:
+          description: 'Accept rate policy'
+          type: boolean
+          default: 'true'
+        rate15:
+          description: 'Rate fo 15 min'
+          type: number
+        rate30:
+          description: 'Rate fo 30 min'
+          type: number
+        rate45:
+          description: 'Rate fo 45 min'
+          type: number
+        rate60:
+          description: 'Rate fo 60 min'
+          type: number
+      type: object
+    AccountRewardModel:
+      properties:
+        accountId:
+          description: 'Account id'
+          type: integer
+        yearReceived:
+          description: year
+          type: integer
+        certificateName:
+          description: Cerificate
+          type: string
+      type: object
+    AccountSymptomModel:
+      required:
+        - accountId
+        - symptomId
+      properties:
+        symptomId:
+          description: ''
+          type: integer
+      type: object
+    AccountTelehealthModel:
+      required:
+        - stateId
+      properties:
+        stateId:
+          description: 'State id'
+          type: integer
+      type: object
+    AutoimmuneDiseaseModel:
+      properties:
+        id:
+          description: id
+        name:
+          description: name
+        description:
+          description: Description
+        slug:
+          description: Slug
+        updatedAt:
+          description: 'Updated at'
+        createdAt:
+          description: 'Created at'
+      type: object
+    EducationCollegeModel:
+      properties:
+        id:
+          description: 'College ID'
+        name:
+          description: 'College name'
+        country:
+          description: 'College country code'
+      type: object
+    HealthGoalModel:
+      properties:
+        id:
+          description: id
+        name:
+          description: name
+        description:
+          description: Description
+        slug:
+          description: Slug
+        updatedAt:
+          description: 'Updated at'
+        createdAt:
+          description: 'Created at'
+      type: object
+    HealthTestModel:
+      properties:
+        id:
+          description: 'Health test'
+          type: integer
+        name:
+          description: 'Health test name'
+          type: string
+      type: object
+    HealthTestCategoryModel:
+      properties:
+        id:
+          description: id
+          type: integer
+        name:
+          description: 'Health test category name'
+          type: string
+      type: object
+    InsuranceCompanyModel:
+      properties:
+        id:
+          description: 'Insurance company Id'
+        name:
+          description: 'Insurance company name'
+      type: object
+    LanguageModel:
+      properties:
+        id:
+          description: 'Language id'
+        name:
+          description: 'Language name'
+      type: object
+    ListPatientModel:
+      properties:
+        id:
+          description: 'ListPatient id'
+        email:
+          description: 'ListPatient email'
+        roleId:
+          description: 'ListPatient roleId'
+      type: object
+    MedicalConditionModel:
+      properties:
+        id:
+          description: id
+        name:
+          description: name
+        description:
+          description: Description
+        slug:
+          description: Slug
+        updatedAt:
+          description: 'Updated at'
+        createdAt:
+          description: 'Created at'
+      type: object
+    AccountProfileSignUpModel:
+      properties:
+        firstName:
+          description: 'First Name'
+          type: string
+        lastName:
+          description: 'Last Name'
+          type: string
+        phoneNumber:
+          description: 'phone number'
+          type: string
+        dateOfBirth:
+          description: 'Date of Birth'
+          type: string
+      type: object
+    AccountProfileModel:
+      properties:
+        firstName:
+          description: 'First Name'
+          type: string
+        lastName:
+          description: 'Last Name'
+          type: string
+        phoneNumber:
+          description: 'phone number'
+          type: string
+        dateOfBirth:
+          description: 'Date of Birth'
+          type: string
+      type: object
+    StateModel:
+      properties:
+        id:
+          description: 'State id'
+        name:
+          description: 'State name'
+        shortName:
+          description: 'State short name'
+        slug:
+          description: 'State slug'
+      type: object
+    StaticPageModel:
+      properties:
+        id:
+          description: 'Page id'
+        name:
+          description: 'Page name'
+        content:
+          description: 'Page content'
+        slug:
+          description: 'Page slug'
+      type: object
+    SymptomModel:
+      properties:
+        id:
+          description: 'Symptom id'
+        name:
+          description: 'Symptom name'
+        description:
+          description: Description
+        slug:
+          description: Slug
+      type: object
+    TransactionModel:
+      properties:
+        id:
+          description: 'Transaction ID'
+          type: integer
+        statusTitle:
+          description: 'Status Title'
+          type: string
+        amount:
+          description: Amount
+          type: number
+        fee:
+          description: Fee
+          type: number
+        allowRefund:
+          description: 'Is Refund Allowed'
+          type: boolean
+      type: object
+    TransactionModelResponse:
+      allOf:
+        -
+          properties:
+            data:
+              $ref: '#/components/schemas/TransactionModel'
+          type: object
+        -
+          $ref: '#/components/schemas/DefaultResponse'
+  parameters:
+    page:
+      name: page
+      in: query
+      description: 'Page number (default value is 1)'
+      required: false
+      schema:
+        type: integer
+    per-page:
+      name: per-page
+      in: query
+      description: 'Items per page (default value is 20)'
+      required: false
+      schema:
+        type: integer
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header

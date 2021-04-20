@@ -1,0 +1,77 @@
+/* list */
+.list-item {
+    padding-top: 3px;
+    background: #fff;
+    border-bottom: 1px solid #E9E9E9;
+    cursor: pointer;
+}
+.list-item:hover {
+    background-color: #f5f5f5;
+}
+#requestsList .list-item:hover {
+    background: #fff;
+}
+.list-actions {
+    position: relative;
+    width: 160px;
+    z-index: 2;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+    top: 100%;
+    border: 1px solid #f2f2f2;
+    box-shadow: 0 0 10px 3px rgba(240, 240, 240, 0.7);
+}
+.list-actions_contacts {
+    margin: -15px auto 0;
+}
+.list-actions_contacts.margin-up {
+    top: inherit;
+    bottom: 70%;
+}
+.list-actions_occupants {
+    position: absolute;
+    margin-top: 32px;
+}
+.list-actions_profile {
+    position: absolute;
+    top: 74px;
+    right: 0;
+}
+.list-actions .list-item {
+    height: auto;
+}
+.list-actions .list-item:last-child {
+    border-bottom: 0;
+}
+.list-actions-action {
+    display: block;
+    padding: 0 10px;
+    font-size: 16px;
+    line-height: 40px;
+    color: #333;
+}
+.list-actions-action:hover {
+    opacity: 1;
+}
+.list_contacts {
+    height: calc(100% - 60px - 60px - 37px);
+    /* 37px - spinner_bounce height */
+}
+.popup-content .list_contacts {
+    height: 100%;
+}
+/* hover icons */
+.header-links-item .icon-active,
+.list-item .icon-active {
+    display: none;
+}
+.header-links-item:hover .icon-normal,
+.send-request:hover .icon-normal {
+    display: none;
+}
+.header-links-item:hover .icon-active,
+.send-request:hover .icon-active {
+    display: inline-block;
+}

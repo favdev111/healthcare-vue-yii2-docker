@@ -1,0 +1,13 @@
+{
+  "name": "progressbar.js",
+  "homepage": "https://github.com/bug7a/progressbar.js",
+  "_release": "f47db4e6a8",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "f47db4e6a88cb9cfb62af428933a8495164c0267"
+  },
+  "_source": "https://github.com/bug7a/progressbar.js.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/bug7a/progressbar.js.git"
+}

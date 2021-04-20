@@ -1,0 +1,61 @@
+@define-mixin flex-box $dir, $jc, $ai {
+    display: flex;
+    flex-direction: $dir;
+    justify-content: $jc;
+    align-items: $ai;
+}
+
+@define-mixin primary-gradient {
+	background: #367fa9;
+}
+
+@define-mixin btn-primary {
+	@mixin primary-gradient;
+	border-color: #367fa9;
+	color: var(--colorWhite);
+}
+
+@define-mixin btn-primary-hover {
+	background-image: linear-gradient(0deg, color(#00A4F1 l(+3.5%)), color(#00D1F9 l(+3.5%)));
+	border-color: #367fa9;
+}
+
+@define-mixin btn-primary-active {
+	background: #367fa9;
+	border-color: #367fa9;
+	color: var(--colorWhite);
+}
+
+@define-mixin box-shadow-xs $color, $position {
+	box-shadow: 0 1px 2px $color $position;
+}
+
+@define-mixin box-shadow-sm $color, $position {
+	box-shadow: 0 2px 3px $color $position;
+}
+
+@define-mixin box-shadow-md $color, $position {
+	box-shadow: 0 2px 5px $color $position;
+}
+
+@define-mixin box-shadow-lg $color, $position {
+	box-shadow: 0 2px 7px $color $position;
+}
+
+@define-mixin word-break {
+	hyphens: auto;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+
+	/* Safari and Chrome CSS and EDGE styles go here */
+	@media screen and (-webkit-min-device-pixel-ratio: 0) {
+		word-break: break-word;
+		hyphens: none;
+	}
+
+	/* Edge CSS styles go here */
+	@supports (-ms-ime-align: auto) {
+		word-wrap: break-word;
+		hyphens: auto;
+	}
+}

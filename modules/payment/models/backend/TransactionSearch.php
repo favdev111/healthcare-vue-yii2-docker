@@ -1,0 +1,147 @@
+<?php
+
+namespace modules\payment\models\backend;
+
+use modules\account\models\backend\Account;
+use modules\account\models\Role;
+use Yii;
+use yii\base\Model;
+use yii\data\ActiveDataProvider;
+
+/**
+ * @inheritdoc
+ */
+class TransactionSearch extends Transaction
+{
+    public $studentEmail;
+    public $tutorEmail;
+    public $processDateRange;
+    public $processDateStart;
+    public $processDateEnd;
+    public $createdAtDateStart;
+    public $createdAtDateEnd;
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['objectId', 'transactionExternalId', 'parentId', 'status', 'type', 'bankTransactionId'], 'integer'],
+            [['amount', 'fee'], 'number'],
+            [['processDate', 'createdAt', 'processDateRange'], 'safe'],
+            [['studentEmail', 'tutorEmail'], 'string'],
+            ['processDate', 'filterProcessDateRange', 'params' => ['startAttribute' => 'processDateStart', 'endAttribute' => 'processDateEnd']],
+            ['createdAt', 'filterProcessDateRange', 'params' => ['startAttribute' => 'createdAtDateStart', 'endAttribute' => 'createdAtDateEnd']],
+        ];
+    }
+
+    public function filterProcessDateRange($attribute, $params)
+    {
+        if (
+            !is_null($this->$attribute) &&
+            strpos($this->$attribute, ' - ') !== false
+        ) {
+            list($this->{$params['startAttribute']}, $this->{$params['endAttribute']}) = explode(' - ', $this->$attribute);
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function scenarios()
+    {
+        // bypass scenarios() implementation in the parent class
+        return Model::scenarios();
+    }
+
+    /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return ActiveDataProvider
+     */
+    public function search($params)
+    {
+        $query = self::find();
+        $query->joinWith('student st');
+        $query->joinWith('tutor tut');
+        $query->andWhere([
+            'or',
+            [
+                'and',
+                ['type' => static::STRIPE_TRANSFER],
+                ['tut.roleId' => Role::ROLE_SPECIALIST]
+            ],
+            ['not', ['type' => static::STRIPE_TRANSFER]]
+        ]);
+        $query->andWhere(['not', ['objectType' => Transaction::TYPE_COMPANY_GROUP_PAYMENT]]);
+        /*$query->andWhere()*/
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'createdAt' => SORT_DESC,
+                ],
+            ],
+        ]);
+
+        $dataProvider->sort->attributes['studentEmail'] = [
+            'asc' => ['st.email' => SORT_ASC],
+            'desc' => ['st.email' => SORT_DESC],
+        ];
+        $dataProvider->sort->attributes['tutorEmail'] = [
+            'asc' => ['tut.email' => SORT_ASC],
+            'desc' => ['tut.email' => SORT_DESC],
+        ];
+
+        /**
+         * load method for form load data. setAttributes without form usage
+         */
+        $this->load($params) || $this->setAttributes($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+        $query->andFilterWhere([
+            self::tableName() . '.id' => $this->id,
+            'objectId' => $this->objectId,
+            'transactionExternalId' => $this->transactionExternalId,
+            'parentId' => $this->parentId,
+            self::tableName() . '.status' => $this->status,
+            'type' => $this->type,
+            'bankTransactionId' => $this->bankTransactionId,
+            'amount' => $this->amount,
+            'fee' => $this->fee,
+        ]);
+
+        $query->andFilterWhere(['like', 'st.email', $this->studentEmail]);
+        $query->andFilterWhere(['like', 'tut.email', $this->tutorEmail]);
+
+        $query->andFilterWhere(['between', 'processDate', $this->processDateStart, $this->processDateEnd]);
+        $query->andFilterWhere(['between', self::tableName() . '.createdAt', $this->createdAtDateStart, $this->createdAtDateEnd]);
+
+        return $dataProvider;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStudent()
+    {
+        return $this->hasOne(Account::className(), ['id' => 'studentId']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTutor()
+    {
+        return $this->hasOne(Account::className(), ['id' => 'tutorId']);
+    }
+}

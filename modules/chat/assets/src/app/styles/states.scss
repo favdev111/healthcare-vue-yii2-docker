@@ -1,0 +1,108 @@
+.is-hidden,
+.is-hover {
+    display: none;
+}
+.is-notVisible {
+    opacity: 0;
+    visibility: hidden;
+}
+body.is-welcome .l-wrapper {
+    box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.26);
+    background: rgb(255, 255, 255);
+}
+body.is-welcome .l-app-version {
+    right: 25px;
+}
+span.is-error {
+    opacity: 1;
+}
+input.is-error {
+    border-color: #cd575c;
+}
+input.is-error:focus {
+    border-color: #cd575c;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(205, 87, 92, .6);
+}
+#mCSB_8_container {
+    //min-height: 500px;
+}
+.list-item.is-chosen,
+.list-item.is-contextmenu {
+    background: #f2f2f2;
+    position: relative;
+}
+.list-item.is-selected {
+    background: rgba(0, 164, 241, 0.12);
+    border-color: #D9D9D9;
+}
+.list-item.is-selected:hover {
+    background: rgba(0, 164, 241, 0.12);
+    border-color: #D9D9D9;
+}
+.list-actions_occupants .list-item:hover {
+    background: #f8f8f8;
+}
+.popup_search .list-item:hover {
+    background: #fff;
+}
+.popup_search .list-item a {
+    cursor: default;
+}
+.list-item.is-selected .name {
+    color: #333;
+}
+.occupant.is-active {
+    background: #1cba48;
+    border: 1px solid #1cba48;
+}
+.occupant.is-active:hover {
+    opacity: 1;
+}
+.occupant.is-active .name {
+    color: #fff;
+}
+.btn_message_smile.is-active,
+.smiles-tab.is-actived {
+    opacity: 1 !important;
+}
+.is-overlay {
+    visibility: visible;
+    opacity: 1;
+    z-index: 600;
+}
+.popup.is-overlay {
+    top: 50%;
+}
+.spinner_bounce.is-empty {
+    margin: 10% auto;
+}
+.spinner_bounce.is-creating {
+    margin: 22px auto;
+}
+.l-chat .spinner_bounce.is-empty {
+    margin: 0 auto;
+    position: absolute;
+    top: 20px;
+    left: 46%;
+}
+.l-chat .spinner_bounce.is-ajaxDownload {
+    position: static;
+}
+.message.is-own {
+    background: #ffffff;
+}
+.is-request .btn_chat_add,
+.is-request .btn_chat_audiocall,
+.is-request .btn_chat_videocall,
+//.is-request .l-chat-footer {
+    //display: none;
+//}
+.is-group .btn_chat_audiocall,
+.is-group .btn_chat_profile,
+.is-group .btn_chat_videocall {
+    display: none;
+}
+.is-contenteditable::before {
+    content: "";
+    line-height: normal;
+}

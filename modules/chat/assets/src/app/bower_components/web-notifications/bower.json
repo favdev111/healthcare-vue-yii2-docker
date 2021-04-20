@@ -1,0 +1,21 @@
+{
+  "name": "web-notifications",
+  "description": "A wrapper for using the Web Notifications API",
+  "main": "qbNotification.js",
+  "authors": ["Dima Lobanov <dmytro.lobanov@injoit.com>"],
+  "license": "BSD",
+  "keywords": ["Notification"],
+  "homepage": "https://github.com/QuickBlox/web-notifications",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/QuickBlox/web-notifications.git"
+  },
+  "moduleType": ["globals", "amd", "node"],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

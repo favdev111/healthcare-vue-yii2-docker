@@ -1,0 +1,31 @@
+{
+  "name": "web-notifications",
+  "version": "1.1.4",
+  "description": "A wrapper for using the Web Notifications API",
+  "main": "qbNotification.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jshint qbNotification.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuickBlox/web-notifications.git"
+  },
+  "keywords": [
+    "Notification",
+    "web-notifications"
+  ],
+  "author": "quickblox team",
+  "license": [
+    {
+      "type": "BSD",
+      "url": "https://github.com/QuickBlox/web-notifications/blob/master/LICENSE"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/QuickBlox/web-notifications/issues"
+  },
+  "homepage": "https://github.com/QuickBlox/web-notifications#readme"
+}

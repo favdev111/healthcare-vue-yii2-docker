@@ -1,0 +1,8 @@
+class_name: ApiTester
+modules:
+  enabled:
+    - Asserts:
+    - common\tests\_support\Yii2:
+        configFile: 'config/test-config.php'
+    - REST:
+        depends: common\tests\_support\Yii2

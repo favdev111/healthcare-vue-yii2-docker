@@ -1,0 +1,8 @@
+# global codeception file to run tests from all apps
+include:
+    - api
+    - api2
+paths:
+    log: console/runtime/logs
+settings:
+    colors: true

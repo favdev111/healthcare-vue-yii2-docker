@@ -1,0 +1,103 @@
+{
+    "name": "winitclinic/api",
+    "description": "Yii 2",
+    "homepage": "https://winitclinic.com/",
+    "type": "private",
+    "license": "proprietary",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.4|^8.0",
+        "ext-json": "*",
+        "ext-zip": "*",
+        "ext-zlib": "*",
+        "2amigos/yii2-selectize-widget": "*",
+        "aksafan/yii2-fcm-both-api": "^0.9.3",
+        "alexandernst/yii2-device-detect": "^0.0.11",
+        "bower-asset/exif-js": "^2.1",
+        "bower-asset/jquery.payment": "v1.4.4",
+        "bower-asset/toastr": "*",
+        "creocoder/yii2-flysystem": "^1.0",
+        "creocoder/yii2-nested-sets": "0.9.*",
+        "ezyang/htmlpurifier": "^4.13",
+        "geoip2/geoip2": "~2.0",
+        "giggsey/libphonenumber-for-php": "~7.0",
+        "google/apiclient": "^2.0",
+        "google/recaptcha": "^1.2",
+        "guzzlehttp/guzzle": " 6.5.5",
+        "himiklab/yii2-sortable-grid-view-widget": "1.0.9",
+        "ip2location/ip2location-php": "^8.2",
+        "jaybizzle/crawler-detect": "^1.2",
+        "kartik-v/yii2-bootstrap4-dropdown": "^1.0",
+        "kartik-v/yii2-date-range": "^1.6",
+        "kartik-v/yii2-datecontrol": "^1.9",
+        "kartik-v/yii2-grid": "^3.3",
+        "kartik-v/yii2-mpdf": "^1.0",
+        "kartik-v/yii2-password": "^1.5",
+        "kartik-v/yii2-slider": "*",
+        "kartik-v/yii2-widget-activeform": "^1.5",
+        "kartik-v/yii2-widget-colorinput": "1.0.5",
+        "kartik-v/yii2-widget-datepicker": "^1.4",
+        "kartik-v/yii2-widget-datetimepicker": "^1.4",
+        "kartik-v/yii2-widget-rating": "*",
+        "kartik-v/yii2-widget-select2": "^2.1",
+        "lcobucci/jwt": "^3.2.2",
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "marqu3s/yii2-summernote": "1.0.0",
+        "npm-asset/cropper": "3.1.0",
+        "npm-asset/croppie": "*",
+        "npm-asset/nouislider": "10.1.0",
+        "npm-asset/signature_pad": "^2.3",
+        "odaialali/yii2-toastr": "@dev",
+        "paquettg/php-html-parser": "2.2",
+        "phpoption/phpoption": "^1.7",
+        "pusher/pusher-php-server": "^4.1",
+        "ruskid/yii2-nouislider": "^1.0",
+        "spatie/google-time-zone": "^1.2",
+        "stripe/stripe-php": "^7.24",
+        "tuyakhov/yii2-notifications": "^1.2",
+        "twilio/sdk": "5.42.2",
+        "udokmeci/yii2-phone-validator": "~1.0.1",
+        "vlucas/phpdotenv": "^5.2",
+        "wbraganca/yii2-dynamicform": "*",
+        "yii2tech/ar-softdelete": "1.0.2",
+        "yii2tech/csv-grid": "^1.0",
+        "yii2tech/filedb": "^1.0",
+        "yiisoft/yii2": "^2.0.40",
+        "yiisoft/yii2-authclient": "^2.2",
+        "yiisoft/yii2-bootstrap4": "^2.0",
+        "yiisoft/yii2-elasticsearch": "~2.1.0",
+        "yiisoft/yii2-httpclient": "*",
+        "yiisoft/yii2-imagine": "^2.0",
+        "yiisoft/yii2-jui": "^2.0",
+        "yiisoft/yii2-queue": "^2.3",
+        "yiisoft/yii2-swiftmailer": "*",
+        "zelenin/yii2-rss": "~0.1"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.5",
+        "symfony/browser-kit": "^5.1",
+        "yiisoft/yii2-debug": "^2.1",
+        "yiisoft/yii2-gii": "^2.2",
+        "zircote/swagger-php": "^3.1"
+    },
+    "config": {
+        "process-timeout": 1800,
+        "optimize-autoloader": false,
+        "sort-packages": true,
+        "fxp-asset": {
+            "enabled": false
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "bash .gitlab/scripts/git-install-hooks.bash"
+        ]
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
+}

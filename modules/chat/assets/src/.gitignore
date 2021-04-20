@@ -1,0 +1,17 @@
+.sass-cache
+/app/.css
+/app/.cssmobile
+.tmp
+.idea
+.DS_Store
+
+# bower & npm packages
+#app/bower_components
+node_modules
+npm-debug.log
+debug.log
+
+# builded QM
+/dist
+/app/scripts/build.js
+/app/scriptsmobile/build.js

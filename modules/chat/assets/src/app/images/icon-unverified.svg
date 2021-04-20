@@ -1,0 +1,10 @@
+<svg width="13px" height="13px" viewBox="-1 2 13 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Group-15" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(0.000000, 3.000000)">
+    <g id="Group-6" stroke="#FF0000" fill="#FFFFFF">
+        <circle id="Oval-2" cx="5.5" cy="5.5" r="5.5"></circle>
+    </g>
+    <g id="Group-22" transform="translate(3.000000, 3.000000)" stroke="#FF0000" stroke-linecap="round">
+        <path d="M0.365937957,0.25 L4.75,4.63406204" id="Line" transform="translate(2.557969, 2.442031) scale(-1, 1) translate(-2.557969, -2.442031) "></path>
+        <path d="M0.5,0.25 L4.59680609,4.72895991" id="Line"></path>
+    </g></g>
+</svg>

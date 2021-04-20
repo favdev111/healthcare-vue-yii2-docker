@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="images/favicon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <link rel="stylesheet" href="https://vjs.zencdn.net/5.8.8/video-js.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <!-- build:css styles/build.css -->
+    <link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="bower_components/progressbar.js/css/lib/control/progressbar.css">
+    <link rel="stylesheet" href="vendor/emoji/css/minEmoji.css">
+    <!-- <link rel="stylesheet" href="bower_components/balloon-css/balloon.min.css"> -->
+
+    <link rel="stylesheet" href=".css/main.css">
+    <!-- endbuild -->
+
+    <!-- build:js vendor/modernizr.js -->
+    <script src="bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+
+</head>
+
+<body class="is-welcome">
+    <!--[if lt IE 10]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="l-wrapper">
+
+        <section id="welcomePage" class="l-page">
+            <div class="l-welcome_container">
+                <div class="l-spinner">
+                    <div class="spinner">
+                        <div class="spinner__item"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mainPage" class="l-page l-chat_wrapper is-hidden">
+            <div class="l-container">
+                <div class="l-content l-flexbox">
+
+                    <aside class="l-sidebar">
+
+                        <div class="l-list-wrap scrollbar">
+
+                            <section id="requestsList" class="l-list is-hidden">
+                                <header class="l-list-header">
+                                    <h3 class="l-list-header-title">Requests</h3>
+                                </header>
+                                <ul class="list j-requestsList"></ul>
+                            </section>
+
+                            <section id="recentList" class="l-list is-hidden">
+                                <ul class="list list_contextmenu j-friendsList j-recentList"></ul>
+                            </section>
+
+                            <section id="emptyList" class="l-list note l-flexbox l-flexbox_column is-hidden">
+                                <span class="text text_alert">Oops...</span>
+                                <span class="text">You don't have any contacts.</span>
+                            </section>
+                        </div>
+                    </aside>
+
+                    <div class="l-workspace-wrap">
+                        <div class="chat_popover popover_gmap j-popover_const j-popover_gmap">
+                            <button class="send_map j-send_map">SEND LOCATION</button>
+                            <div class="coner"><i class="icon_coner"></i></div>
+                        </div>
+
+                        <div class="chat_popover popover_smile j-popover_const j-popover_smile">
+                            <div class="smiles-tabs">
+                                <button class="smiles-tab smiles-tab_people is-actived" data-group="people"></button>
+                                <button class="smiles-tab smiles-tab_nature" data-group="nature"></button>
+                                <button class="smiles-tab smiles-tab_objects" data-group="objects"></button>
+                                <button class="smiles-tab smiles-tab_places" data-group="places"></button>
+                                <button class="smiles-tab smiles-tab_symbols" data-group="symbols"></button>
+                            </div>
+                            <div class="smiles-wrap">
+                                <div class="smiles-group smiles-group_people j-smiles-group">
+                                    😄😃😀😊☺😉😍😘😚😗😙😜😝😛😳😁😔😌😒😞😣 😢😂😭😪😥😰😅😓😩😫😨😱😠😡😤😖😆😋😷😎😴 😵😲😟😦😧😈👿😮😬😐😕😯😶😇😏😑👲👳👮👷💂 👶👦👧👨👩👴👵👱👼👸😺😸😻😽😼🙀😿😹😾👹👺 🙈🙉🙊💀👽💩🔥✨🌟💫💥💢💦💧💤💨👂👀👃👅👄 👍👎👌👊✊✌👋✋👐👆👇👉👈🙌🙏☝👏💪🚶🏃💃
+                                    👫👪👬👭💏💑👯🙆🙅💁🙋💆💇💅👰🙎🙍🙇🎩👑👒 👟👞👡👠👢👕👔👚👗🎽👖👘👙💼👜👝👛👓🎀🌂💄 💛💙💜💚❤💔💗💓💕💖💞💘💌💋💍💎👤👥💬👣💭
+                                </div>
+                                <div class="smiles-group smiles-group_nature j-smiles-group is-hidden">
+                                    🐶🐺🐱🐭🐹🐰🐸🐯🐨🐻🐷🐽🐮🐗🐵🐒🐴🐑🐘🐼🐧 🐦🐤🐥🐣🐔🐍🐢🐛🐝🐜🐞🐌🐙🐚🐠🐟🐬🐳🐋🐄🐏 🐀🐃🐅🐇🐉🐎🐐🐓🐕🐖🐁🐂🐲🐡🐊🐫🐪🐆🐈🐩🐾 💐🌸🌷🍀🌹🌻🌺🍁🍃🍂🌿🌾🍄🌵🌴🌲🌳🌰🌱🌼🌐 🌞🌝🌚🌑🌒🌓🌔🌕🌖🌗🌘🌜🌛🌙🌍🌎🌏🌋🌌🌠⭐ ☀⛅☁⚡☔❄⛄🌀🌁🌈🌊
+                                </div>
+                                <div class="smiles-group smiles-group_objects j-smiles-group is-hidden">
+                                    🎍💝🎎🎒🎓🎏🎆🎇🎐🎑🎃👻🎅🎄🎁🎋🎉🎊🎈🎌🔮 🎥📷📹📼💿📀💽💾💻📱☎📞📟📠📡📺📻🔊🔉🔈🔇 🔔🔕📢📣⏳⌛⏰⌚🔓🔒🔏🔐🔑🔎💡🔦🔆🔅🔌🔋🔍 🛁🛀🚿🚽🔧🔩🔨🚪🚬💣🔫🔪💊💉💰💴💵💷💶💳💸 📲📧📥📤✉📩📨📯📫📪📬📭📮📦📝📄📃📑📊📈📉 📜📋📅📆📇📁📂✂📌📎✒✏📏📐📕📗📘📙📓📔📒 📚📖🔖📛🔬🔭📰🎨🎬🎤🎧🎼🎵🎶🎹🎻🎺🎷🎸👾🎮
+                                    🃏🎴🀄🎲🎯🏈🏀⚽⚾🎾🎱🏉🎳⛳🚵🚴🏁🏇🏆🎿🏂 🏊🏄🎣☕🍵🍶🍼🍺🍻🍸🍹🍷🍴🍕🍔🍟🍗🍖🍝🍛🍤 🍱🍣🍥🍙🍘🍚🍜🍲🍢🍡🍳🍞🍩🍮🍦🍨🍧🎂🍰🍪🍫 🍬🍭🍯🍎🍏🍊🍋🍒🍇🍉🍓🍑🍈🍌🍐🍍🍠🍆🍅🌽
+                                </div>
+                                <div class="smiles-group smiles-group_places j-smiles-group is-hidden">
+                                    🏠🏡🏫🏢🏣🏥🏦🏪🏩🏨💒⛪🏬🏤🌇🌆🏯🏰⛺🏭🗼 🗾🗻🌄🌅🌃🗽🌉🎠🎡⛲🎢🚢⛵🚤🚣⚓🚀✈💺🚁🚂 🚊🚉🚞🚆🚄🚅🚈🚇🚝🚋🚃🚎🚌🚍🚙🚘🚗🚕🚖🚛🚚 🚨🚓🚔🚒🚑🚐🚲🚡🚟🚠🚜💈🚏🎫🚦🚥⚠🚧🔰⛽🏮 🎰♨🗿🎪🎭📍🚩🇯🇵🇰🇷🇩🇪🇨🇳🇺🇸🇫🇷🇪🇸🇮🇹🇷🇺🇬🇧
+                                </div>
+                                <div class="smiles-group smiles-group_symbols j-smiles-group is-hidden">
+                                    1⃣2⃣3⃣4⃣5⃣6⃣7⃣8⃣9⃣0⃣🔟🔢#⃣🔣⬆⬇⬅➡🔠🔡🔤 ↗↖↘↙↔↕🔄◀▶🔼🔽↩↪ℹ⏪⏩⏫⏬⤵⤴🆗 🔀🔁🔂🆕🆙🆒🆓🆖📶🎦🈁🈯🈳🈵🈴🈲🉐🈹🈺🈶🈚 🚻🚹🚺🚼🚾🚰🚮🅿♿🚭🈷🈸🈂Ⓜ🛂🛄🛅🛃🉑㊙㊗ 🆑🆘🆔🚫🔞📵🚯🚱🚳🚷🚸⛔✳❇❎✅✴💟🆚📳📴 🅰🅱🆎🅾💠➿♻♈♉♊♋♌♍♎♏♐♑♒♓⛎🔯 🏧💹💲💱©®™❌‼⁉❗❓❕❔⭕🔝🔚🔙🔛🔜🔃 🕛🕧🕐🕜🕑🕝🕒🕞🕓🕟🕔🕠🕕🕖🕗🕘🕙🕚🕡🕢🕣
+                                    🕤🕥🕦✖➕➖➗♠♥♣♦💮💯✔☑🔘🔗➰〰〽🔱 ◼️◻️◾️◽️▪️▫️🔺🔲🔳⚫️⚪️🔴🔵🔻⬜️⬛️🔶🔷🔸🔹
+                                </div>
+                            </div>
+                            <div class="coner"><i class="icon_coner"></i></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <div class="popups l-flexbox j-overlay">
+
+        <section id="popupDisconnect" class="popup popup_discon is-open j-disconnect">
+            <div class="popup-alert l-flexbox_inline l-flexbox_flexcenter">
+                <span class="alert alert_discon"><b>Not Connected.</b> Connecting...</span>
+            </div>
+        </section>
+
+        <!-- Popup with users settings (on/off sounds and local notification for calls or messages) -->
+        <section id="popupSettings" class="popup popup_settings is-open j-settings">
+            <header class="header_settings">
+                <span class="header_settings_label">Settings</span>
+                <div class="i-close_settings j-close_settings"></div>
+            </header>
+            <div class="body_settings">
+                <ul class="container_settings">
+                    <li class="switch_settings">
+                        <div class="switch_label_block">
+                            <div class="i-notifications_settings"></div>
+                            <span class="settings_label">Desktop Notifications</span>
+                        </div>
+                    </li>
+                    <li class="messages_settings switch_settings">
+                        <div class="switch">
+                            <label class="toogle_settings j-toogle_settings">
+                                <span class="settings_label">Messages Notifications</span>
+                                <input id="messages_notify" class="j-setings_notify" type="checkbox" checked>
+                                <span class="lever"></span>
+                            </label>
+                        </div>
+                    </li>
+                    <li class="calls_settings switch_settings">
+                        <div class="switch">
+                            <label class="toogle_settings j-toogle_settings">
+                                <span class="settings_label">Calls Notification</span>
+                                <input id="calls_notify" class="j-setings_notify" type="checkbox" checked>
+                                <span class="lever"></span>
+                            </label>
+                        </div>
+                    </li>
+                    <li class="sound_settings switch_settings">
+                        <div class="switch">
+                            <label class="toogle_settings j-toogle_settings">
+                                <span class="settings_label">Sounds</span>
+                                <input id="sounds_notify" class="j-setings_notify" type="checkbox" checked>
+                                <span class="lever"></span>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+                <footer class="footer_settings_menu">
+                    <label class="footer_settings">
+                        <a class="footer_settings_link" href="https://github.com/QuickBlox/q-municate-web/issues/new" target="_blank">
+                            <div class="i-feedback_settings i-footer_settings"></div>
+                            <span class="footer_settings_label">Write Feedback</span>
+                        </a>
+                    </label>
+                    <label class="footer_settings">
+                        <a class="footer_settings_link" href="http://q-municate.com/" target="_blank">
+                            <div class="i-help_settings i-footer_settings"></div>
+                            <span class="footer_settings_label">About</span>
+                        </a>
+                    </label>
+                </footer>
+            </div>
+        </section>
+
+        <section id="popupGeoInfo" class="popup popup_geo_info j-geoInfo">
+            <span class="alert alert_geo_info">
+                <b>Your location can't be detected.</b>
+                <br/>Please enable your location in browser settings and refresh current page after that.
+            </span>
+        </section>
+
+        <section id="popupDetails" class="popup popup_details presence-listener">
+            <div class="userDetails-preview">
+                <div class="userDetails-avatar profileUserAvatar"></div>
+                <div class="userDetails-info">
+                    <h3 class="userDetails-filename profileUserName"></h3>
+                    <span class="userDetails-status profileUserStatus"></span>
+                </div>
+            </div>
+            <div class="userDetails-chatStatus"></div>
+            <div class="userDetails-controls l-flexbox"></div>
+            <div class="userDetails-field profileUserPhone"></div>
+        </section>
+
+        <section id="popupIncoming" class="popup incoming-call-popup is-open"></section>
+
+        <section id="popupAttach" class="popup popup_attach">
+            <img class="attach-photo" src="" alt="attach">
+            <video class="video-js vjs-default-skin vjs-big-play-centered attach-video" controls autoplay preload="auto" data-setup="{}">
+                <source src="" type="video/mp4"/>
+                <source src="" type="video/webm"/>
+            </video>
+            <div class="attach-description l-flexbox l-flexbox_flexbetween">
+                <span class="attach-name"></span>
+                <a class="attach-download" href="" target="_blank" download="">Download</a>
+            </div>
+        </section>
+    </div>
+
+    <audio id="callingSignal" loop>
+        <source src="audio/calling.ogg"></source>
+        <source src="audio/calling.mp3"></source>
+    </audio>
+
+    <audio id="ringtoneSignal" loop>
+        <source src="audio/ringtone.ogg"></source>
+        <source src="audio/ringtone.mp3"></source>
+    </audio>
+
+    <audio id="endCallSignal">
+        <source src="audio/end_of_call.ogg"></source>
+        <source src="audio/end_of_call.mp3"></source>
+    </audio>
+
+    <div id="fb-root"></div>
+
+    <!-- build:js scripts/build.js -->
+    <!--<script src="bower_components/requirejs/require.js"></script>-->
+    <script src="scripts/build.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>

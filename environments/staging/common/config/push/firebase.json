@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "heytutor-staging",
+  "private_key_id": "5b171084e113c46a6cf4cc82c3b8512aea900e45",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCuHtXXwH+VWP3e\nXXQovm/XVa5gndMsIiPf3jVJY49Rb34FIaB3x2ZjL1vdHZD3fnx4wB9pQJ+j687+\nx45h16cTEEW31mt8dTE+R9rdxI2DLKCWr86WfP/slrfPhK0OQBY2aCyN/gclUAV8\nAI3ZwilH/z5ZrH6PR/6bG3Uc4SWF7OF4+ms+G2dARXITMin+2/cQwjg/lWtrgdt/\nsE6JkrUkaQOipnKnk+AhqzL+pDJzBm037wJA6+KesmoYm5g4R7JWmsjEfmzpUlri\ncdqxWiMEtAqRK4waLxk1AdR9rlD+otPcIw1zqofHUejWWhNI8j3FVDN94cZ5tkqI\n7IE2K7OPAgMBAAECggEAKTJegieniByAJGaUHze/moFJOs7csep59nPKw8xskmYA\nuRIVt4FUNk90OsLOE+C3bpJ2XB7QJqaaWSm6BGhTvWzyMebnk5Dez8+Md0AUA19B\nt6VtCaoVm1KlttG7aE29c63+LLJX2noucgJnjYgk4EYB6JGpeBkeonBCq0yR5jeb\nelm6rgQl848TXvizR6jFLDfBJvQwlf7ULYFD338sa2twcv8wq1PRi1nyISNWTcSZ\n9Gn4QLP6g2WAVTuTqqarPYSLk743iF1XEKnLzysN90T8rjEtJBTx0CVdJyhRWWqZ\n6BdcTmsl99sWI0IgkxF3nL1JZAqNGwcXQOzB/iog4QKBgQDlQo4J88QdGWMaPVfe\nIFsnkOZhLAoEjXFgx63hUHyn1/0BZcdRktb6rjFa2SnldV33zH+rzr6aUhxgC6LM\nQOjpnm/XAVIK15DhwWMQO3H9qchRT8gZqu1RBUmYBOl/+1JBgT416vinw+Ksaxlm\nreTAloS5Wd/OgkxpQMUiKOA1twKBgQDCbeBLXqJgYPtB6N7qOYEHJ2rTKxkpey5C\nlIXSSHS4XNW9QL2nKiBenP1nCWuEaYz9tRHQxaV0BvsVVMpsLEuAooKxK+of/N9/\nTcB+bw66GkC/5+h14YDAeZCXZhap0r5wTPBTfiM5eshSmjOzSfTHeSfNU+t/Fs/W\n6dmYZDuw6QKBgQCb6B7f9b4wa8tRVNYkYKycw5VoD6LgZa/suN4uk6WyHtgX0zcw\n6kL4Ru2ZcoVjXeWBVricBgTovV4+kqsrbBj4hp5YALXiWaZVYEYWC9cBQizP3wmd\nKvgoWQgrMWv5dNgDY/kCgcCHllbYGh00Dp25uqKXyd7BeSqtiTaGfHW9EQKBgEor\nslnuQxFzTcaJ+Kfvweohvl3KXjH13OLnV9mtbGF8gMlOrkrcBjcxunWZIVwFDBUp\nAx/allCZ7STpEMONbkwnMqY18326cORWm+1fnoWeSD8tT//QQ9apSWCIQHMOgznC\nEBg50WQ3E753NuvZdbi23lk0/2yfHjCFS04YRrEpAoGAOwdaVf+7jKL2lGwzDPSR\nfU0T1WuWuaWX37CYjgjubfsvLpdT36TlPZmYJ6v/SWZH1ljFbTplCnZzczIF/tKb\noECFQA8eKIyICk81uluPe0ZT/UhSKCFScaA+kMRlxFy6IkMqTFdnVUmpC3iSdTiG\nLfHsHfeVRb8ZfVlNbXENSXI=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-43ue1@heytutor-staging.iam.gserviceaccount.com",
+  "client_id": "115917509347428974541",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-43ue1%40heytutor-staging.iam.gserviceaccount.com"
+}
